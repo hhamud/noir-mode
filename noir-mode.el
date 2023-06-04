@@ -1,6 +1,6 @@
 ;;; noir-mode.el --- Description -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2023 User
+;; Copyright (C) 2023 Hamza Hamud
 ;;
 ;; Author: Hamza Hamud
 ;; Maintainer: Hamza Hamud
@@ -12,10 +12,6 @@
 ;; Package-Requires: ((emacs "24.3"))
 ;;
 ;; This file is not part of GNU Emacs.
-;;
-;;; Commentary:
-;;
-;;  Description
 ;;
 ;;; Code:
 
