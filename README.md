@@ -1,6 +1,5 @@
 # noir-mode.el
 
----
 
 ## Description
 

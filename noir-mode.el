@@ -54,6 +54,16 @@
           ("//.*" . font-lock-comment-face)
           ;; multi-line comments
           ("/\\*\\(.\\|\n\\)*?\\*/" . font-lock-comment-face)
+          ;; fn names
+          ("fn \\([_a-zA-Z][_a-zA-Z0-9]*\\)(\\(.*?\\))" 1 font-lock-function-name-face)
+          ;; match and highlight the function part
+          ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+\\([_a-zA-Z][_a-zA-Z0-9]*\\)" 2 font-lock-function-name-face)
+          ;; match and highlight the module path part excluding the last component
+          ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+" . font-lock-type-face)
+          ;; match and highlight the last component of the module path separately
+          ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+\\([_a-zA-Z][_a-zA-Z0-9]*\\)\\(?:::\\|;\\)" 2 font-lock-function-name-face)
+          ;; for macros
+          ("#\\[[^]]*\\]" . font-lock-warning-face)
           ;; note: order above matters. “x-keywords-regexp” goes last because
           ;; otherwise the keyword “state” in the function “state_entry”
           ;; would be highlighted.
@@ -70,9 +80,7 @@
         syn-table))
 
 (define-key noir-mode-map [remap comment-dwim] 'noir-comment-dwim)
-
 (add-to-list 'auto-mode-alist '("\\.nr\\'" . noir-mode))
-
 
 (provide 'noir-mode)
 ;;; noir-mode.el ends here
