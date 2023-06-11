@@ -20,18 +20,21 @@
 ;;; Code:
 
 (require 'rust-mode)
-(eval-when-compile
-  (require 'rx))
+
 
 (defvar noir-mode-keywords '("constrain" "assert"))
 (defvar noir-mode-types '("Field" "Witness"))
 (defvar noir-mode-functions '("printf" "sprintf" "include" "load" "next" "import"))
+(defvar noir-mode-function-call "\\<\\([a-zA-Z_][a-zA-Z0-9_]*\\)\\s-*(")
+
+
 
 (defvar noir-mode-highlights
   `(
     (,(regexp-opt noir-mode-keywords 'symbols) . 'font-lock-keyword-face)
     (,(regexp-opt noir-mode-types 'words) . 'font-lock-type-face)
     (,(regexp-opt noir-mode-functions 'words) . 'font-lock-function-name-face)
+    (,noir-mode-function-call . (1 'font-lock-function-name-face))
     ))
 
 
