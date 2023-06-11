@@ -3,13 +3,12 @@
 
 ## Description
 
-`noir-mode.el` is a major mode for editing Noir language source files in Emacs. It provides syntax highlighting and indentation support for working with Noir code.
+`noir-mode.el` is a major mode for editing Noir language source files in Emacs. It provides syntax highlighting for working with Noir code.
 
 ## Features
 
 - Syntax highlighting for keywords, types, constants, events, and functions in Noir.
 - Customizable comment syntax.
-- Proper indentation for Noir code.
 - Automatic file association with `.nr` files.
 
 ## Installation
@@ -25,7 +24,7 @@
 
 ## Usage
 
-Once `noir-mode.el` is installed, it will automatically be enabled when you open a `.nr` file. The major mode will provide syntax highlighting and indentation support for editing Noir code.
+Once `noir-mode.el` is installed, it will automatically be enabled when you open a `.nr` file. The major mode will provide syntax highlighting for editing Noir code.
 
 ## Keybindings
 
