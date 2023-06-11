@@ -1,4 +1,4 @@
-# noir-mode.el
+# Noir mode
 
 
 ## Description
