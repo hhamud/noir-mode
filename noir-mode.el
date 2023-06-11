@@ -5,84 +5,44 @@
 ;; Author: Hamza Hamud
 ;; Maintainer: Hamza Hamud
 ;; Created: June 04, 2023
-;; Modified: June 04, 2023
-;; Version: 0.0.1
-;; Keywords: noir lang syntax highlighting
+;; Modified: June 11, 2023
+;; Version: 0.0.2
+;; Keywords: languages
 ;; Homepage: https://github.com/hhamud/noir-mode
-;; Package-Requires: ((emacs "24.3"))
+;; Package-Requires: ((emacs "25.1") (rust-mode "1.0.5"))
+;; SPDX-License-Identifier: GPL3 License
+;; This file is distributed under the terms of GPL License (version 3.0).
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
+;; This package implements a major-mode for editing Noir source code.
+;;
 ;;; Code:
 
-(define-derived-mode noir-mode prog-mode "Noir"
-  "Major mode for editing Noir language source files."
-  (setq font-lock-defaults '((noir-font-lock-keywords) nil nil))
-  (setq-local comment-start "//")
-  (setq-local comment-end "")
-  (setq-local syntax-table noir-mode-syntax-table)
-  (setq mode-name "noir"))
+(require 'rust-mode)
+(eval-when-compile
+  (require 'rx))
+
+(defvar noir-mode-keywords '("constrain" "assert"))
+(defvar noir-mode-types '("Field" "Witness"))
+(defvar noir-mode-functions '("printf" "sprintf" "include" "load" "next" "import"))
+
+(defvar noir-mode-highlights
+  `(
+    (,(regexp-opt noir-mode-keywords 'symbols) . 'font-lock-keyword-face)
+    (,(regexp-opt noir-mode-types 'words) . 'font-lock-type-face)
+    (,(regexp-opt noir-mode-functions 'words) . 'font-lock-function-name-face)
+    ))
 
 
+;;;###autoload
+(define-derived-mode noir-mode rust-mode
+  "Noir"
+  (font-lock-add-keywords nil noir-mode-highlights))
 
-
-(setq noir-font-lock-keywords
-      (let* (
-             ;; define several category of keywords
-             (x-keywords '("fn" "mod" "use" "struct" "if" "else" "for" "constrain" "global" "comptime" "pub" "in" "as" "let" "mut"))
-             (x-types '("str" "bool" "Field" "Witness" "u8" "i8" "u16" "i16" "u32" "i32" "u64" "i64" "u128" "i128"))
-             (x-constants '("true" "false"))
-             (x-events '("on" "signal" "emit" "call" "after" "before" "set" "get" "if" "else" "while" "do" "try" "catch" "finally"))
-             (x-functions '("print" "println" "printf" "sprintf" "error" "require" "include" "load" "next" "import"))
-
-             ;; generate regex string for each category of keywords
-             (x-keywords-regexp (regexp-opt x-keywords 'words))
-             (x-types-regexp (regexp-opt x-types 'words))
-             (x-constants-regexp (regexp-opt x-constants 'words))
-             (x-events-regexp (regexp-opt x-events 'words))
-             (x-functions-regexp (regexp-opt x-functions 'words)))
-
-        `(
-          (,x-types-regexp . font-lock-type-face)
-          (,x-constants-regexp . font-lock-constant-face)
-          (,x-events-regexp . font-lock-builtin-face)
-          (,x-functions-regexp . font-lock-function-name-face)
-          (,x-keywords-regexp . font-lock-keyword-face)
-          ;; single-line comments
-          ("//.*" . font-lock-comment-face)
-          ;; multi-line comments
-          ("/\\*\\(.\\|\n\\)*?\\*/" . font-lock-comment-face)
-          ;; fn names
-          ("fn \\([_a-zA-Z][_a-zA-Z0-9]*\\)(\\(.*?\\))" 1 font-lock-function-name-face)
-          ;; struct names
-          ("^\\s-*struct\\s-+\\(\\(\\w+\\)\\)\\s-*{" (1 font-lock-type-face))
-          ;; match and highlight the function part
-          ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+\\([_a-zA-Z][_a-zA-Z0-9]*\\)" 2 font-lock-function-name-face)
-          ;; match and highlight the module path part excluding the last component
-          ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+" . font-lock-type-face)
-          ;; match and highlight the last component of the module path separately
-          ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+\\([_a-zA-Z][_a-zA-Z0-9]*\\)\\(?:::\\|;\\)" 2 font-lock-function-name-face)
-          ;; for macros
-          ("#\\[[^]]*\\]" . font-lock-warning-face)
-          ;; struct keys
-          ("\\_<\\(\\(?!::\\)\\(\\w+\\)\\)\\s-*:" . (2 font-lock-variable-name-face))
-          ;; note: order above matters. “x-keywords-regexp” goes last because
-          ;; otherwise the keyword “state” in the function “state_entry”
-          ;; would be highlighted.
-          )))
-
-(defvar noir-mode-syntax-table nil "Syntax table for `noir-mode'.")
-
-(setq noir-mode-syntax-table
-      (let ((syn-table (make-syntax-table)))
-        ;; C++ style comment “// …”
-        (modify-syntax-entry ?/ ". 124b" syn-table)
-        (modify-syntax-entry ?* ". 23" syn-table)
-        (modify-syntax-entry ?\n "> b" syn-table)
-        syn-table))
-
-(define-key noir-mode-map [remap comment-dwim] 'noir-comment-dwim)
+;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.nr\\'" . noir-mode))
 
 (provide 'noir-mode)
 ;;; noir-mode.el ends here
+
