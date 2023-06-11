@@ -8,12 +8,11 @@
 ## Features
 
 - Syntax highlighting for keywords, types, constants, events, and functions in Noir.
-- Customizable comment syntax.
 - Automatic file association with `.nr` files.
 
 ## Installation
 
-1. Make sure you have Emacs version 24.3 or higher installed.
+1. Make sure you have Emacs version 25.1 and rust-mode 1.05 or higher installed.
 2. Download `noir-mode.el` from the [GitHub repository](https://github.com/hhamud/noir-mode).
 3. Move `noir-mode.el` to a directory in your Emacs load path.
 4. Add the following code to your Emacs configuration file:
