@@ -24,10 +24,12 @@
   (setq mode-name "noir"))
 
 
+
+
 (setq noir-font-lock-keywords
       (let* (
              ;; define several category of keywords
-             (x-keywords '("fn" "mod" "use" "struct" "if" "else" "for" "constrain" "global" "comptime" "pub" "in" "as" "let"))
+             (x-keywords '("fn" "mod" "use" "struct" "if" "else" "for" "constrain" "global" "comptime" "pub" "in" "as" "let" "mut"))
              (x-types '("str" "bool" "Field" "Witness" "u8" "i8" "u16" "i16" "u32" "i32" "u64" "i64" "u128" "i128"))
              (x-constants '("true" "false"))
              (x-events '("on" "signal" "emit" "call" "after" "before" "set" "get" "if" "else" "while" "do" "try" "catch" "finally"))
@@ -52,6 +54,8 @@
           ("/\\*\\(.\\|\n\\)*?\\*/" . font-lock-comment-face)
           ;; fn names
           ("fn \\([_a-zA-Z][_a-zA-Z0-9]*\\)(\\(.*?\\))" 1 font-lock-function-name-face)
+          ;; struct names
+          ("^\\s-*struct\\s-+\\(\\(\\w+\\)\\)\\s-*{" (1 font-lock-type-face))
           ;; match and highlight the function part
           ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+\\([_a-zA-Z][_a-zA-Z0-9]*\\)" 2 font-lock-function-name-face)
           ;; match and highlight the module path part excluding the last component
@@ -60,6 +64,8 @@
           ("\\([_a-zA-Z][_a-zA-Z0-9]*::\\)+\\([_a-zA-Z][_a-zA-Z0-9]*\\)\\(?:::\\|;\\)" 2 font-lock-function-name-face)
           ;; for macros
           ("#\\[[^]]*\\]" . font-lock-warning-face)
+          ;; struct keys
+          ("\\_<\\(\\(?!::\\)\\(\\w+\\)\\)\\s-*:" . (2 font-lock-variable-name-face))
           ;; note: order above matters. “x-keywords-regexp” goes last because
           ;; otherwise the keyword “state” in the function “state_entry”
           ;; would be highlighted.
