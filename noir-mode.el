@@ -15,8 +15,9 @@
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
+;;; Commentary:
 ;; This package implements a major-mode for editing Noir source code.
-;;
+
 ;;; Code:
 
 (require 'rust-mode)
