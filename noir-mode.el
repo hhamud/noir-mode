@@ -5,16 +5,15 @@
 ;; Author: Hamza Hamud
 ;; Maintainer: Hamza Hamud
 ;; Created: June 04, 2023
-;; Modified: June 11, 2023
+;; Modified: June 13, 2023
 ;; Version: 0.0.2
 ;; Keywords: languages
 ;; Homepage: https://github.com/hhamud/noir-mode
 ;; Package-Requires: ((emacs "25.1") (rust-mode "1.0.5"))
-;; SPDX-License-Identifier: GNU General Public License v3.0
+;; SPDX-License-Identifier: GPL-3.0-only
+
 ;; This file is distributed under the terms of GNU General Public License v3.0
-;;
-;; This file is not part of GNU Emacs.
-;;
+
 ;;; Commentary:
 ;; This package implements a major-mode for editing Noir source code.
 
