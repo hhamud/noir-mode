@@ -10,8 +10,8 @@
 ;; Keywords: languages
 ;; Homepage: https://github.com/hhamud/noir-mode
 ;; Package-Requires: ((emacs "25.1") (rust-mode "1.0.5"))
-;; SPDX-License-Identifier: GPL3 License
-;; This file is distributed under the terms of GPL License (version 3.0).
+;; SPDX-License-Identifier: GNU General Public License v3.0
+;; This file is distributed under the terms of GNU General Public License v3.0
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
