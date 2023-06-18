@@ -1,8 +1,5 @@
 # Noir mode
 
-
-## Description
-
 `noir-mode.el` is a major mode for editing Noir language source files in Emacs. It provides syntax highlighting for working with Noir code.
 
 ## Features
@@ -12,6 +9,14 @@
 
 ## Installation
 
+### Melpa
+
+``` shell
+package-install noir-mode
+```
+
+
+### Other
 1. Make sure you have Emacs version 25.1 and rust-mode 1.05 or higher installed.
 2. Download `noir-mode.el` from the [GitHub repository](https://github.com/hhamud/noir-mode).
 3. Move `noir-mode.el` to a directory in your Emacs load path.
