@@ -23,7 +23,7 @@
 
 ;; Define the keywords for noir mode
 (defvar noir-mode-keywords
-  '("constrain" "assert")
+  '("constrain" "assert" "global")
   "Keywords for Noir language.")
 
 ;; Define the types for noir mode

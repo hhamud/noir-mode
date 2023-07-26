@@ -1,12 +1,11 @@
 # Noir mode
 [![MELPA](https://melpa.org/packages/noir-mode-badge.svg)](https://melpa.org/#/noir-mode)
-[![MELPA Stable](https://stable.melpa.org/packages/noir-mode-badge.svg)](https://stable.melpa.org/#/noir-mode)
 
 `noir-mode.el` is a major mode for editing Noir language source files in Emacs. It provides syntax highlighting for working with Noir code.
 
 ## Features
 
-- Syntax highlighting for keywords, types, constants, events, and functions in Noir.
+- Syntax highlighting for keywords, types, globals, and functions in Noir.
 - Automatic file association with `.nr` files.
 
 ## Installation
