@@ -6,7 +6,7 @@
 ;; Maintainer: Hamza Hamud
 ;; Created: June 04, 2023
 ;; Modified: June 13, 2023
-;; Version: 0.0.2
+;; Version: 1.1
 ;; Keywords: languages
 ;; Homepage: https://github.com/hhamud/noir-mode
 ;; Package-Requires: ((emacs "25.1") (rust-mode "1.0.5"))
@@ -20,6 +20,7 @@
 ;;; Code:
 
 (require 'rust-mode)
+(require 'noir-ts-mode)
 
 ;; Define the keywords for noir mode
 (defvar noir-mode-keywords
@@ -47,11 +48,31 @@
     (,noir-mode-function-call . (1 'font-lock-function-name-face)))
   "Highlighting rules for Noir language.")
 
+
+(defgroup noir nil
+  "Major mode for editing Noir code."
+  :prefix "noir-"
+  :group 'languages)
+
+(defcustom noir-mode-treesitter-derive nil
+  "Whether noir-mode should derive from the new treesitter mode `noir-ts-mode'
+instead of `noir-mode'. This option requires emacs29+."
+  :version "29.1"
+  :type 'boolean
+  :group 'noir)
+
+(if (and (version<= "29.1" emacs-version) noir-mode-treesitter-derive)
+
+;;;###autoload
+(define-derived-mode noir-mode noir-ts-mode
+  "Noir")
+
 ;;;###autoload
 (define-derived-mode noir-mode rust-mode
   "Noir"
   ;; Add the noir mode highlights to the current buffer
-  (font-lock-add-keywords nil noir-mode-highlights))
+  (font-lock-add-keywords nil noir-mode-highlights)))
+
 
 ;;;###autoload
 ;; Automatically use noir mode for files with .nr extension
